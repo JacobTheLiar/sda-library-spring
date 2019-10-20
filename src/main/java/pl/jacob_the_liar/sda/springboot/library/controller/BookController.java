@@ -12,14 +12,7 @@ import java.util.Optional;
 import java.util.Set;
 
 
-/**
- * @author: Jakub O.  [https://github.com/JacobTheLiar]
- * @date : 2019-10-20 11:11
- * *
- * @className: BookController
- * *
- * *
- ******************************************************/
+
 @RestController
 public class BookController{
     
@@ -67,5 +60,12 @@ public class BookController{
         }
         
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping(value = "/book/return/{bookId}", produces ="application/json")
+    public ResponseEntity<Book> returnBook(@PathVariable int bookId){
+        orderService.returnBook(bookId);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
