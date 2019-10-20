@@ -62,9 +62,9 @@ public class BookController{
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping(value = "/book/return/{bookId}", produces ="application/json")
-    public ResponseEntity<Book> returnBook(@PathVariable int bookId){
-        orderService.returnBook(bookId);
+    @GetMapping(value = "/book/return/{id}", produces ="application/json")
+    public ResponseEntity<Book> returnBook(@PathVariable int id){
+        orderService.returnBook(id);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

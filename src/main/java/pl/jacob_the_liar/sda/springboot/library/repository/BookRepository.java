@@ -58,18 +58,18 @@ public class BookRepository{
     }
     
     
-    public boolean removeBook(int bookId){
+    public boolean removeBook(int id){
         Optional<Book> b = bookList.stream()
-                .filter(book -> book.getId() == bookId)
+                .filter(book -> book.getId() == id)
                 .findFirst();
     
         return b.filter(book -> bookList.remove(book)).isPresent();
     }
     
     
-    public void deliveryBook(int bookId){
+    public void deliveryBook(int id){
         bookList.stream()
-                .filter(book -> book.getId() == bookId)
+                .filter(book -> book.getId() == id)
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Book not found"))
                 .setRentedTill(null);

@@ -42,12 +42,13 @@ public class OrderService{
     }
     
     
-    public boolean removeBook(int bookId){
-        return bookRepository.removeBook(bookId);
+    public boolean removeBook(int id){
+        return bookRepository.removeBook(id);
     }
     
-    public void returnBook(int bookId){
-        bookRepository.deliveryBook(bookId);
+    public void returnBook(int id){
+
+        bookRepository.deliveryBook(id);
     }
     
     public Set<Book> allBooks(){
