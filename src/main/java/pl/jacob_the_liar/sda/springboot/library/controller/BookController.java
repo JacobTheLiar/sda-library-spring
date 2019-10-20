@@ -72,7 +72,10 @@ public class BookController{
 
     @GetMapping(value = "/books/{id}")
     public ResponseEntity<Book> findIdOfBook(@RequestParam int id) {
-        Optional<Book> book = orderService;
-
+        Optional<Book> book = orderService.findBookById(id);
+        if ((book.isPresent())) {
+            return ResponseEntity.ok(book.get());
+        }
+        return ResponseEntity.notFound().build();
     }
 }
