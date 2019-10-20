@@ -69,4 +69,8 @@ public class OrderService{
     public Book addBook(Book book){
         return bookRepository.addNewBook(book);
     }
+
+    public Optional<Book> findBookById(int id) {
+        return bookRepository.deliveryBook(id);
+    }
 }
