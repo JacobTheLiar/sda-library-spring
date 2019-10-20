@@ -71,6 +71,6 @@ public class OrderService{
     }
 
     public Optional<Book> findBookById(int id) {
-        return bookRepository.allBooks().stream().filter(findBookById(id));
+        return bookRepository.allBooks().stream().filter(book -> book.getId() == id ).findAny();
     }
 }
