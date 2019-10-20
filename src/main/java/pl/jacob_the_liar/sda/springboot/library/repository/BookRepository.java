@@ -86,13 +86,21 @@ public class BookRepository{
     }
     
     
-    public Set<Book> findBook(String bookTitle){
+    public Set<Book> findBook(String bookTitle, String bookAuthor){
         return bookList.stream()
-                .filter(book -> book.getTitle().toUpperCase().contains(bookTitle.toUpperCase()))
+                .filter(book -> isFoundBook(book, bookTitle, bookAuthor))
                 .filter(book -> book.getRentedTill() == null)
                 .collect(Collectors.toSet());
     }
     
+    
+    private boolean isFoundBook(Book book, String bookTitle, String bookAuthor){
+        boolean foundTitle = bookTitle != null && book.getTitle().toUpperCase().contains(bookTitle.toUpperCase());
+        foundTitle |= bookTitle == null;
+        boolean foundAuthor = bookAuthor != null &&  book.getAuthor().toUpperCase().contains(bookAuthor.toUpperCase());
+        foundAuthor |= bookAuthor == null;
+        return foundTitle && foundAuthor;
+    }
     
     public Optional<Book> borrowBookById(int id, LocalDate borrowerTill){
         Optional<Book> optBook = bookList.stream()

@@ -32,11 +32,11 @@ public class BookController{
     
     
     @GetMapping(value = "/books")
-    public Set<Book> findBooks(@RequestParam @Nullable String find){
-        if (find == null) {
+    public Set<Book> findBooks(@RequestParam(required = false) String title, @RequestParam(required = false) String author){
+        if (title == null && author == null){
             return orderService.allBooks();
         }
-        return orderService.findBook(find);
+        return orderService.findBook(title, author);
     }
     
     
