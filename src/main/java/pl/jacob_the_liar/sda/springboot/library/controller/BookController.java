@@ -13,14 +13,7 @@ import java.util.Optional;
 import java.util.Set;
 
 
-/**
- * @author: Jakub O.  [https://github.com/JacobTheLiar]
- * @date : 2019-10-20 11:11
- * *
- * @className: BookController
- * *
- * *
- ******************************************************/
+
 @RestController
 public class BookController{
     
@@ -33,11 +26,11 @@ public class BookController{
     
     
     @GetMapping(value = "/books")
-    public Set<Book> findBooks(@RequestParam @Nullable String find){
-        if (find == null) {
+    public Set<Book> findBooks(@RequestParam(required = false) String title, @RequestParam(required = false) String author){
+        if (title == null && author == null){
             return orderService.allBooks();
         }
-        return orderService.findBook(find);
+        return orderService.findBook(title, author);
     }
     
     
@@ -77,5 +70,12 @@ public class BookController{
             return ResponseEntity.ok(book.get());
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping(value = "/book/return/{bookId}", produces ="application/json")
+    public ResponseEntity<Book> returnBook(@PathVariable int bookId){
+        orderService.returnBook(bookId);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

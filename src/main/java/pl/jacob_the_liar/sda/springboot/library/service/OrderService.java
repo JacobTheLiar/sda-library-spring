@@ -55,8 +55,8 @@ public class OrderService{
     }
     
     
-    public Set<Book> findBook(String bookTitle){
-        return bookRepository.findBook(bookTitle);
+    public Set<Book> findBook(String bookTitle, String bookAuthor){
+        return bookRepository.findBook(bookTitle, bookAuthor);
     }
     
     
